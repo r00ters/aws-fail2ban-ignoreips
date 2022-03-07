@@ -11,11 +11,12 @@ AWS_SERVICE="CLOUDFRONT"
 AWS_IP_RANGES_URL="https://ip-ranges.amazonaws.com/ip-ranges.json"
 
 RELOAD_CMD="fail2ban-client reload --all"
+POST_RELOAD_CMD="echo Ignoreips are changed"
 #-----END CONFIGURATION-----
 
 update_and_reload () {
     cp "${TMP_FILE}" "${JAIL_CONF_FILE}"
-    ${RELOAD_CMD}
+    ${RELOAD_CMD} && ${POST_RELOAD_CMD}
 }
 
 SELF="$(basename "$(test -L "$0" && readlink "$0" || echo "$0")")"
